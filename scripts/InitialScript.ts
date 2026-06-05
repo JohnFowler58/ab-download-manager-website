@@ -1,4 +1,5 @@
 import {generateLatestVersionData} from "./GenerateLatestVersionData";
+import {generateSitemap} from "./GenerateSitemap";
 import path from "path";
 import * as fs from "node:fs";
 
@@ -11,6 +12,7 @@ export async function main() {
     fs.mkdirSync(generatedPath,{
         recursive:true,
     })
-    await generateLatestVersionData(generatedPath)
+    await generateLatestVersionData(generatedPath, process.env.GITHUB_TOKEN)
+    await generateSitemap(path.resolve(__dirname, "..", "public"))
 }
 main()
